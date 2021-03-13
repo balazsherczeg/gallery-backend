@@ -1,0 +1,7 @@
+public/
+incoming/
+_public/
+_incoming/
+node_modules/
+.env.development
+.env.production
