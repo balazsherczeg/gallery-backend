@@ -5,3 +5,4 @@ _incoming/
 node_modules/
 .env.development
 .env.production
+.env
