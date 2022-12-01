@@ -23,7 +23,6 @@ prepareData();
 // const files = fs.readdirSync(INCOMING);
 // console.log(files);
 
-
 // const d = require('./export-data').data;
 // const e = [...d];
 // e.sort((a, b) => {
