@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const yaml = require('js-yaml')
 const getBaseName = require('./utils').getBaseName;

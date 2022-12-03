@@ -1,25 +1,12 @@
 const fs = require('fs');
 const isImage = require('is-image');
 
-const ExifImage = require('exif').ExifImage;
-
-const getImageFocalLength = (image) => {
-  return new Promise((resolve, reject) => {
-    new ExifImage({image}, (error, {exif}) => {
-      if (error) reject(error);
-      return resolve(exif.FocalLengthIn35mmFormat);
-    });
-  });
-};
-
 const getDominantColor = require('./getDominantColor').default;
 const getImageDate = require('./getImageDate').default;
 const resizeImage = require('./resizeImage').default;
 const getBaseName = require('./utils').getBaseName;
-const readImageDataFile = require('./utils').readImageDataFile;
 
-const INCOMING = './incoming/';
-const PUBLIC = './public/';
+const {PUBLIC, INCOMING} = process.env;
 const imageDataFile = process.env.PUBLIC + 'imageData.json'
 
 const getImageData = () => {
@@ -51,11 +38,6 @@ const getDeletables = (imageData, files) => {
 const importImages = async () => {
   const imageData = getImageData();
   const files = getFiles();
-
-  files.forEach(async (file) => {
-    const f = await getImageFocalLength(INCOMING + file);
-    fs.appendFile('message.txt', `${f}\n`, () => {})
-  });
 
   const importables = getImportables(imageData, files);
   const deletables = getDeletables(imageData, files);

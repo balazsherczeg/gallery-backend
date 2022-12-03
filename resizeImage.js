@@ -6,7 +6,7 @@ const sizeOf = require('image-size');
 
 const {INCOMING, PUBLIC} = process.env;
 
-const sizes = [200, 400];
+const sizes = [200, 400, 1200, 2000];
 
 const resizeToSize = (img, size) => {
   const fileName = `${getBaseName(img)}-${size}${getExtension(img)}`;
@@ -55,7 +55,7 @@ const resizeImage = async (img) => {
 
   for (let i = 0; i < sizes.length; i++) {
     const size = sizes[i];
-    if (originalWidth > size) {
+    if (originalWidth >= size) {
       data[size] = await resizeToSize(img, size);
     }
   }
