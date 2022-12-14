@@ -19,7 +19,10 @@ const categories = readYaml('categories.yml');
 const tags = readYaml('tags.yml');
 
 const getAllImageInfo = () => {
-  const files = fs.readdirSync(INCOMING + 'info/images/');
+  const files = fs
+    .readdirSync(INCOMING + 'info/images/')
+    .filter(item => !(/(^|\/)\.[^/.]/g).test(item));
+
   let allImageInfo = [];
 
   for (let i = 0; i < files.length; i++) {
@@ -58,6 +61,7 @@ const processData = (importData) => {
     id,
     date: manualDate,
     category,
+    tags,
   }) => {
     if (importData[id]) {
       const {
@@ -76,6 +80,7 @@ const processData = (importData) => {
         },
         sources: processSources(sources),
         category,
+        tags,
       });
     } else {
       console.log("Image file missing: ", id);
